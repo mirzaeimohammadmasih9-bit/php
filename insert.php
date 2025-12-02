@@ -1,21 +1,22 @@
-<?php
-include 'connect.php';           
-$x=$_POST["f_name"];
-$y=$_POST["l_name"];
-$s=$_POST["n_code"];
-$h=$_POST["father_name"];
-$f=$_POST["phone_n"];
+ <?php
+include 'conn.php';
+$x=$_POST["first_name"];
+$y=$_POST["last_name"];
+$s=$_POST["father_name"];
+$h=$_POST["user_name"];
+$f=$_POST["pas"];
 
 $servername="localhost";
 $username="root";
 $password="";
-$database="mirza";
-$conn= connect("localhost","root","","mirza");
-function ql($x , $y , $s , $h , $f, $conn)
+$database="ma30";
+$conn= connect("localhost","root","","ma30");
+function ql($x , $y , $s , $h , $f,$conn)
 {
- $q="INSERT INTO mirza (f_name , l_name , n_code , father_name , phone_n)
- VALUES ('$x' , '$y' , '$s' , '$h' , '$f')";
+$hash = password_hash($f, PASSWORD_DEFAULT);
+$q="INSERT INTO mirza (first_name, last_name, father_name, user_name, pas)
+ VALUES ('$x' , '$y' , '$s' , '$h' , '$hash')";
  mysqli_query($conn,$q);
 }
- ql($x ,$y, $s ,$h ,$f ,$conn);
+ ql($x, $y, $s , $h, $f,$conn);
 ?>
